@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slap Simulator</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/FreddieThePebble/Slap-Sheldon/refs/heads/main/Sheldon.png">
     <style>
         body {
             margin: 0;
@@ -21,7 +22,7 @@
             -webkit-appearance: none;
             appearance: none;
             width: 100%;
-            height: 20px; /* Increased height for better usability */
+            height: 20px; /* Thicker slider for usability */
             background: #555;
             outline: none;
             opacity: 0.9;
@@ -84,6 +85,16 @@
         slider.addEventListener('input', () => {
             const progress = slider.value / 100;
             video.currentTime = progress * video.duration;
+        });
+
+        // Handle arrow keys for navigation
+        document.addEventListener('keydown', (event) => {
+            const step = 0.1; // Seconds to move the video by
+            if (event.key === 'ArrowLeft') {
+                video.currentTime = Math.max(0, video.currentTime - step); // Move backward
+            } else if (event.key === 'ArrowRight') {
+                video.currentTime = Math.min(video.duration, video.currentTime + step); // Move forward
+            }
         });
 
         // Start the animation loop once the video is ready
